@@ -16,6 +16,24 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.iamhi.hizone</groupId>
+            <artifactId>blog-gateway</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.iamhi.hizone</groupId>
+            <artifactId>blog-data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.iamhi.hizone</groupId>
+            <artifactId>blog-config</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
