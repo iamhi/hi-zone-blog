@@ -12,4 +12,6 @@ public class AuthConfig {
     String username;
 
     String password;
+
+    String baseUrl;
 }

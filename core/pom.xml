@@ -27,6 +27,11 @@
             <artifactId>blog-config</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.iamhi.hizone</groupId>
+            <artifactId>blog-external</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

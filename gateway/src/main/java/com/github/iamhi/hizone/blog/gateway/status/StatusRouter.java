@@ -1,5 +1,6 @@
 package com.github.iamhi.hizone.blog.gateway.status;
 
+import com.github.iamhi.hizone.blog.external.authentication.AuthenticationClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +30,7 @@ public class StatusRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> composePing2Route(WebClient.Builder builder) {
+    public RouterFunction<ServerResponse> composePing2Route(WebClient.Builder builder, AuthenticationClient authenticationClient) {
         return route(GET(ROUTER_PREFIX + "/ping2"), serverRequest -> {
             WebClient client;
 
@@ -39,7 +40,7 @@ public class StatusRouter {
 
             Mono<Map> response = client.get().uri("/authentication/status/ping").accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Map.class);
 
-            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(response, Map.class);
+            return authenticationClient.isConnected().flatMap(isConnected -> ServerResponse.ok().bodyValue(isConnected));
         });
     }
 }
