@@ -14,4 +14,6 @@ public class AuthConfig {
     String password;
 
     String baseUrl;
+
+    String accessTokenName;
 }
