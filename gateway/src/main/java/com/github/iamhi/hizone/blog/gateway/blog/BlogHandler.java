@@ -18,8 +18,14 @@ public record BlogHandler(
     CookieHandler cookieHandler
 ) {
 
+    private static final String PAGE_QUERY_PARAM = "page";
+    private static final String SIZE_QUERY_PARAM = "size";
+
     Mono<ServerResponse> fetchBlogs(ServerRequest serverRequest) {
-        return ServerResponse.ok().body(blogService.readBlogs(), BlogDTO.class);
+        return ServerResponse.ok().body(blogService.readBlogs(
+            Integer.parseInt(serverRequest.queryParam(PAGE_QUERY_PARAM).orElse("0")),
+            Integer.parseInt(serverRequest.queryParam(SIZE_QUERY_PARAM).orElse("100"))
+        ), BlogDTO.class);
     }
 
     Mono<ServerResponse> createBlog(ServerRequest serverRequest) {

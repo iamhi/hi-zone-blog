@@ -14,7 +14,7 @@ public interface BlogService {
         String mediaType,
         UserDTO userDTO);
 
-    Flux<BlogDTO> readBlogs();
+    Flux<BlogDTO> readBlogs(int page, int size);
 
     Mono<BlogDTO> readBlog(String uuid);
 

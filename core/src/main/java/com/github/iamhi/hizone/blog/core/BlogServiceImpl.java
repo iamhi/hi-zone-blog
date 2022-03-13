@@ -5,6 +5,8 @@ import com.github.iamhi.hizone.blog.core.models.UserDTO;
 import com.github.iamhi.hizone.blog.data.BlogEntity;
 import com.github.iamhi.hizone.blog.data.BlogRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -33,8 +35,14 @@ record BlogServiceImpl(
     }
 
     @Override
-    public Flux<BlogDTO> readBlogs() {
-        return blogRepository.findAll().map(BlogDTO::fromEntity);
+    public Flux<BlogDTO> readBlogs(int page, int size) {
+        return blogRepository
+            .findByUuidNotNull(
+                PageRequest.of(
+                    page,
+                    size,
+                    Sort.by(Sort.Direction.DESC, "createdAt")))
+            .map(BlogDTO::fromEntity);
     }
 
     @Override
